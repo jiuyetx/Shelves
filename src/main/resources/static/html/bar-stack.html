@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/goods-list.css">
+</head>
+<body>
+<!-- 头部导航栏 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">仓储管理</a>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- 左侧菜单栏 -->
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <!-- 菜单项 -->
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../html/goods-list.html">
+                        食材列表
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/log-list.html">
+                        入出库记录
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        图表
+                    </a>
+                </li>
+                <!-- 添加更多菜单项 -->
+            </ul>
+        </nav>
+
+        <!-- 内容区域 -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4" style="height: 600px">
+            <!-- 页面内容将在这里加载 -->
+            <div id="container" style="height: 100%; width: 3000px"></div>
+            <div>
+                <p>
+                    3个库，菜库，鱼肉库，粮食库,每个库都是2-3个货架，3层
+                </p>
+                <p>
+                    货架编号 1-9
+                </p>
+                <p>
+                    货架层编号 1-3
+                </p>
+                <p>
+                    编号 No.13表示为第一个货架的第三层
+                </p>
+
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="../js/jquery.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+<script type="text/javascript" src="https://fastly.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
+
+<script type="text/javascript">
+    getChartData();
+
+    function getChartData() {
+        // 向后端发起HTTP请求获取商品数据
+        fetch(`http://localhost:8090/shelves/chart`)
+            .then((response) => response.json())
+            .then((chartData) => {
+                var dom = document.getElementById('container');
+                var myChart = echarts.init(dom, null, {
+                    renderer: 'canvas',
+                    useDirtyRect: false
+                });
+
+                var option;
+
+                option = {
+                    tooltip: {
+                        trigger: 'axis',
+                        axisPointer: {
+                            type: 'shadow'
+                        }
+                    },
+                    legend: {},
+                    grid: {
+                        left: '3%',
+                        right: '4%',
+                        bottom: '3%',
+                        containLabel: true
+                    },
+                    xAxis: [
+                        {
+                            type: 'category',
+                            data: chartData.xAxis
+                        }
+                    ],
+                    yAxis: [
+                        {
+                            type: 'value'
+                        }
+                    ],
+                    series: chartData.series
+                };
+
+                if (option && typeof option === 'object') {
+                    myChart.setOption(option);
+                }
+
+                window.addEventListener('resize', myChart.resize);
+
+            });
+    }
+</script>
+
+</body>
+</html>

@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../css/goods-list.css">
+</head>
+<body>
+<!-- 头部导航栏 -->
+<nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="#">仓储管理</a>
+</nav>
+
+<div class="container-fluid">
+    <div class="row">
+        <!-- 左侧菜单栏 -->
+        <nav id="sidebar" class="col-md-3 col-lg-2 d-md-block bg-light sidebar">
+            <!-- 菜单项 -->
+            <ul class="nav flex-column">
+                <li class="nav-item">
+                    <a class="nav-link active" href="../html/goods-list.html">
+                        食材列表
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">
+                        入出库记录
+                    </a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="../html/bar-stack.html">
+                        图表
+                    </a>
+                </li>
+                <!-- 添加更多菜单项 -->
+            </ul>
+        </nav>
+
+        <!-- 内容区域 -->
+        <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
+            <!-- 页面内容将在这里加载 -->
+            <h1>出入库记录</h1>
+            <div class="container">
+                <table id="logTable" class="table">
+                    <thead>
+                    <tr>
+                        <th>编号</th>
+                        <th>操作</th>
+                        <th>数量</th>
+                        <th>内容</th>
+                        <th>创建时间</th>
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <!-- 商品数据将通过JavaScript动态添加到此处 -->
+                    </tbody>
+                </table>
+                <div class="pagination">
+                    <button id="prevBtn">上一页</button>
+                    <span id="pageInfo">Page 1 of 1</span>
+                    <button id="nextBtn">下一页</button>
+                </div>
+            </div>
+        </main>
+    </div>
+</div>
+
+<script src="../js/log-list.js"></script>
+<script src="../js/jquery.min.js"></script>
+<script src="../js/popper.min.js"></script>
+<script src="../js/bootstrap.min.js"></script>
+
+</body>
+</html>

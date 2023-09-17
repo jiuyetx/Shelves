@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 获取商品数据并更新页面
     function fetchAndRenderGoods(page) {
         // 向后端发起HTTP请求获取商品数据
-        fetch(`http://localhost:8090/goods/list?page=${page}&size=${itemsPerPage}`)
+        fetch(`/goods/list?page=${page}&size=${itemsPerPage}`)
             .then((response) => response.json())
             .then((data) => {
                 // 清空商品表格
@@ -32,7 +32,10 @@ document.addEventListener("DOMContentLoaded", function () {
 
                     // 创建操作按钮元素
                     const button = document.createElement("button");
+                    button.className = "btn btn-link";
                     button.innerHTML = "入库"; // 设置按钮文本
+                    button.setAttribute("data-toggle", "modal");
+                    button.setAttribute("data-target", "#myModal");
                     button.onclick = function() {
                         const stockTitle = document.getElementById("stockTitle");
                         stockTitle.innerHTML = "入库";
@@ -40,13 +43,15 @@ document.addEventListener("DOMContentLoaded", function () {
                         stockGoodsId.value = item.id;
                         const stockType = document.getElementById("stockType");
                         stockType.value = "in";
-                        modal.style.display = "block";
                     };
 
                     cell.appendChild(button);
 
                     const outBt = document.createElement("button");
+                    outBt.className = "btn btn-link";
                     outBt.innerHTML = "出库"; // 设置按钮文本
+                    outBt.setAttribute("data-toggle", "modal");
+                    outBt.setAttribute("data-target", "#myModal");
                     outBt.onclick = function() {
                         const stockTitle = document.getElementById("stockTitle");
                         stockTitle.innerHTML = "出库";
@@ -54,15 +59,16 @@ document.addEventListener("DOMContentLoaded", function () {
                         stockGoodsId.value = item.id;
                         const stockType = document.getElementById("stockType");
                         stockType.value = "out";
-                        modal.style.display = "block";
                     };
                     cell.appendChild(outBt);
 
                     const locationBt = document.createElement("button");
+                    locationBt.className = "btn btn-link";
                     locationBt.innerHTML = "变更货架/层"; // 设置按钮文本
+                    locationBt.setAttribute("data-toggle", "modal");
+                    locationBt.setAttribute("data-target", "#locationModal");
                     locationBt.onclick = function() {
                         document.getElementById("locationGoodsId").value = item.id;
-                        locationModal.style.display = "block";
                     };
 
                     cell.appendChild(locationBt);
@@ -90,24 +96,5 @@ document.addEventListener("DOMContentLoaded", function () {
 
     // 初始化页面
     fetchAndRenderGoods(currentPage);
-});
-
-$(document).ready(function () {
-    // 默认加载第一个页面
-    loadPage("page1.html");
-
-    // 菜单项点击事件
-    $(".nav-link").click(function () {
-        var pageUrl = $(this).attr("href");
-        loadPage(pageUrl);
-        return false; // 防止默认跳转
-    });
-
-    // 加载页面内容的函数
-    function loadPage(url) {
-        $(".nav-link").removeClass("active"); // 移除所有菜单项的激活状态
-        $(".nav-link[href='" + url + "']").addClass("active"); // 激活当前菜单项
-        $("main").load(url); // 加载页面内容
-    }
 });
 

@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded", function () {
     // 获取商品数据并更新页面
     function fetchAndRenderGoods(page) {
         // 向后端发起HTTP请求获取商品数据
-        fetch(`http://localhost:8090/log/list?page=${page}&size=${itemsPerPage}`)
+        fetch(`/log/list?page=${page}&size=${itemsPerPage}`)
             .then((response) => response.json())
             .then((data) => {
                 // 清空商品表格

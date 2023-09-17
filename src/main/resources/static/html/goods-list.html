@@ -3,8 +3,9 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="../css/bootstrap.min.css">
+    <link rel="stylesheet" href="../bootstrap/css/bootstrap.min.css">
     <link rel="stylesheet" href="../css/goods-list.css">
+    <link rel="stylesheet" href="../css/common.css">
 </head>
 <body>
 <!-- 头部导航栏 -->
@@ -41,8 +42,8 @@
         <main role="main" class="col-md-9 ml-sm-auto col-lg-10 px-md-4">
             <!-- 页面内容将在这里加载 -->
             <h1>食材列表</h1>
-            <button id="openModalBtn">新增</button>
             <div class="container">
+                <button type="button" id="openModalBtn" class="btn btn-success" style="float: right" data-toggle="modal" data-target="#createModal">新增</button>
                 <table id="goodsTable" class="table">
                     <thead>
                     <tr>
@@ -71,40 +72,72 @@
     </div>
 </div>
 
-<div id="myModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2 id="stockTitle">修改库存</h2>
-        <input type="number" id="stockInput" placeholder="数量" min="0">
-        <input type="number" id="stockGoodsId" hidden="hidden">
-        <input type="text" id="stockType" hidden="hidden">
-        <button id="confirmBtn">确认</button>
-        <button id="cancelBtn">取消</button>
+<div id="myModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 id="stockTitle" class="modal-title">修改库存</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body input-container">
+                <label for="stockInput">数量:</label><input type="number" id="stockInput" min="0">
+                <label for="stockGoodsId"></label><input type="number" id="stockGoodsId" hidden="hidden">
+                <label for="stockType"></label><input type="text" id="stockType" hidden="hidden">
+            </div>
+            <div class="modal-footer">
+                <button id="confirmBtn" type="button" class="btn btn-primary">确认</button>
+                <button class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="locationModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>变更货架/层</h2>
-        <input type="number" id="locationShelvesNo" placeholder="货架" min="1">
-        <input type="number" id="locationFloor" placeholder="层" min="1">
-        <input type="number" id="locationGoodsId" hidden="hidden">
-        <button id="localConfirmBtn">确认</button>
-        <button id="localCancelBtn">取消</button>
+<div id="locationModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">变更货架层</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body input-container">
+                <label for="locationShelvesNo">货架编号:</label><input type="number" id="locationShelvesNo" min="1">
+                <label for="locationFloor">层数:</label><input type="number" id="locationFloor" min="1">
+                <label for="locationGoodsId"></label><input type="number" id="locationGoodsId" hidden="hidden">
+            </div>
+            <div class="modal-footer">
+                <button id="localConfirmBtn" type="button" class="btn btn-primary">确认</button>
+                <button class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
     </div>
 </div>
 
-<div id="createModal" class="modal">
-    <div class="modal-content">
-        <span class="close">&times;</span>
-        <h2>商品信息</h2>
-        <input type="text" id="productName" placeholder="商品名称">
-        <input type="number" id="stockQuantity" placeholder="库存数量" min="0">
-        <input type="text" id="unit" placeholder="单位">
-        <input type="number" id="shelfNumber" placeholder="货架编号" min="1">
-        <input type="number" id="floorNumber" placeholder="层数" min="1">
-        <button id="saveBtn">保存</button>
+<div id="createModal" class="modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title">新增食材</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body input-container">
+                <label for="productName">名称:</label><input type="text" id="productName" placeholder="">
+                <label for="stockQuantity">库存数量:</label><input type="number" id="stockQuantity" placeholder=""
+                                                                   min="0">
+                <label for="unit"></label>单位:<input type="text" id="unit" placeholder="">
+                <label for="shelfNumber">货架编号:</label><input type="number" id="shelfNumber" placeholder="" min="1">
+                <label for="floorNumber">层数:</label><input type="number" id="floorNumber" placeholder="" min="1">
+            </div>
+            <div class="modal-footer">
+                <button id="saveBtn" type="button" class="btn btn-primary">保存</button>
+                <button class="btn btn-secondary" data-dismiss="modal">取消</button>
+            </div>
+        </div>
     </div>
 </div>
 
@@ -113,7 +146,7 @@
 <script src="../js/create-goods.js"></script>
 <script src="../js/jquery.min.js"></script>
 <script src="../js/popper.min.js"></script>
-<script src="../js/bootstrap.min.js"></script>
+<script src="../bootstrap/js/bootstrap.min.js"></script>
 
 </body>
 </html>

@@ -12,11 +12,6 @@ var floorNumberInput = document.getElementById("floorNumber");
 // 获取保存按钮
 var saveBtn = document.getElementById("saveBtn");
 
-// 点击按钮时显示模态框
-openModalBtn.onclick = function() {
-    createModal.style.display = "block";
-}
-
 // 点击关闭按钮或模态框外部时关闭模态框
 window.onclick = function(event) {
     if (event.target === createModal) {
